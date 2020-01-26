@@ -15,8 +15,9 @@ class CreateAppartenireTable extends Migration
     {
         Schema::create('appartenire', function (Blueprint $table) {
             $table->bigInteger('groupe_id');
-            $table->bigInteger('compte_id');
-            $table->primary(['groupe_id','compte_id']);
+            $table->bigInteger('user_id');
+            $table->primary(['groupe_id','user_id']);
+            $table->enum('type', ['normale', 'admin']);
             $table->timestamps();
         });
     }

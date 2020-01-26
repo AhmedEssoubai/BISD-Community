@@ -22,8 +22,10 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('image')->default('default.png');
             $table->string('niveau')->default(0);
-            $table->enum('type', ['normale', 'admin']);
             $table->rememberToken();
+            $table->string('api_token', 80)
+            ->unique()
+            ->nullable();
             $table->timestamps();
         });
     }
