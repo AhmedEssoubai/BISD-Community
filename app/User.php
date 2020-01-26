@@ -36,4 +36,27 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * The user add a list of post to his favoit
+     * 
+     */
+    public function post() {
+        return $this->hasMany(App\Post::class);
+    }
+       
+    /**
+     * The user can post manu post
+     * 
+     */
+    public function publish() {
+        return $this->hasMany(\Post::class);
+    }
+
+    /**
+     * User can belong to a group and can be an admin of a group
+     */
+    public function groupe() {
+        return $this->belongsToMany('App\Groupe', 'appartenire')->withPivot(['type']);
+    }
 }

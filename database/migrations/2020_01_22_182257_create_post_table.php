@@ -16,10 +16,9 @@ class CreatePostTable extends Migration
         Schema::create('post', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->longText('content');
-            $table->dateTime('date_publication', 0);
+            $table->timestamp('date_publication')->default(now());
             $table->bigInteger('compte_id');
             $table->bigInteger('groupe_id');
-            $table->bigInteger('tag_id');
         });
     }
 

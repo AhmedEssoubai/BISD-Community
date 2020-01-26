@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCommentTable extends Migration
+class CreatePostTagsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreateCommentTable extends Migration
      */
     public function up()
     {
-        Schema::create('comment', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->longText('content');
-            $table->timestamp('date_publication')->default(now());
+        Schema::create('post_tags', function (Blueprint $table) {
+            $table->bigInteger('tag_id');
             $table->bigInteger('post_id');
-            $table->bigInteger('comment_id');
+            $table->primary(['tag_id','post_id']);
+            $table->timestamps();
         });
     }
 
@@ -29,6 +28,6 @@ class CreateCommentTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('comment');
+        Schema::dropIfExists('post_tags');
     }
 }
