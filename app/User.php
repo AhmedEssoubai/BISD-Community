@@ -41,22 +41,25 @@ class User extends Authenticatable
      * The user add a list of post to his favoit
      * 
      */
-    public function post() {
+    public function post()
+    {
         return $this->hasMany(App\Post::class);
     }
-       
+
     /**
      * The user can post manu post
      * 
      */
-    public function publish() {
-        return $this->hasMany(\Post::class);
+    public function publish()
+    {
+        return $this->hasMany(Post::class);
     }
 
     /**
      * User can belong to a group and can be an admin of a group
      */
-    public function groupe() {
+    public function groupe()
+    {
         return $this->belongsToMany('App\Groupe', 'appartenire')->withPivot(['type']);
     }
 }

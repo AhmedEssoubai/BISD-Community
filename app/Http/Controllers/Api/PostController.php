@@ -4,14 +4,17 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 use App\Post;
+use App\Tag;
 
 class PostController extends Controller
 {
 
-    private function Validate($request) {
-        
-    }
+    // private function Validate($request) {
+
+    // }
     /**
      * Display a listing of the resource.
      *
@@ -19,7 +22,7 @@ class PostController extends Controller
      */
     public function index($groupe)
     {
-        $data = Post::all();
+        $data = Post::where('groupe_id', $groupe);
         return response()->json($data, 200);
     }
 
@@ -31,11 +34,25 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        
 
+        $post = new Post();
+        $post->content = $request['content'];
 
-        return request()->all();
+        $post->groupe()->associate($request->route('groupe'));
 
+        $post->compte()->associate(Auth::id());
+
+        $post->save();
+
+        $tags = [];
+        foreach ($request['tags'] as $tag) {
+            $tags[] = Tag::create([
+                'label' => $tag,
+            ])->id;
+        }
+
+        $post->tags()->attach($tags);
+        return $post;
     }
 
     /**
@@ -44,9 +61,9 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($groupe, $id)
     {
-        //
+        return Post::with('tags')->find($id);
     }
 
     /**
@@ -56,9 +73,25 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $groupe, $id)
     {
-        //
+        $post = Post::find($id);
+        if ($post->compte_id == Auth::id()) {
+            $post->content = $request['content'];
+
+            $post->save();
+
+            $tags = [];
+            foreach ($request['tags'] as $tag) {
+                $tags[] = Tag::create([
+                    'label' => $tag,
+                ])->id;
+            }
+
+            $post->tags()->attach($tags);
+            return response()->json($post->tags);
+        }
+        return response()->json(['error' => "user " . Auth::user()->nom . " not autorized"]);
     }
 
     /**
@@ -67,8 +100,12 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($groupe, $id)
     {
-        //
+        $post = Post::find($id);
+        if ($post->compte_id == Auth::id()) {
+            $post->delete();
+            return response()->json(['response' => "delated"]);
+        }
     }
 }
