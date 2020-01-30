@@ -3,7 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 
 class AccessGroupe
 {
@@ -18,7 +18,8 @@ class AccessGroupe
     {
 
         $groupe = $request->route('groupe');
-        if( !empty(Auth::user()->groupe()->find($groupe)) || (!empty(\App\Groupe::find($groupe)) && \App\Groupe::find($groupe)->etat == 'public') ) {
+
+        if (!empty(Auth::user()->groupe()->find($groupe)) || (!empty(\App\Groupe::find($groupe)) && \App\Groupe::find($groupe)->etat == 'public')) {
             return $next($request);
         }
 

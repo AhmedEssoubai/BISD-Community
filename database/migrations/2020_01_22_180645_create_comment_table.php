@@ -19,6 +19,7 @@ class CreateCommentTable extends Migration
             $table->timestamp('date_publication')->default(now());
             $table->bigInteger('post_id');
             $table->bigInteger('comment_id');
+            $table->bigInteger('compte_id');
         });
     }
 

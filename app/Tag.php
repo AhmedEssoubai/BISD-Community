@@ -10,7 +10,8 @@ class Tag extends Model
     protected $table = 'tag';
     protected $fillable = ['label'];
 
-    public function post() {
-        return $this->hasMany(App\Post::class);
+    public function post()
+    {
+        return $this->belongsToMany(Post::class, 'post_tags');
     }
 }
