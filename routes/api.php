@@ -39,11 +39,11 @@ Route::group(['middleware' => 'auth:api', 'namespace' => 'Api'], function () {
     Route::get('{groupe}/post/{id}', 'PostController@show');
     Route::delete('{groupe}/post/{id}', 'PostController@destroy');
 
-    Route::get('{groupe}/comments', 'CommentController@index');
+    Route::get('{groupe}/comments/{post_id}', 'CommentController@index');
     Route::post('{groupe}/comments/{post_id}/{parent_comment_id?}', 'CommentController@store');
     Route::put('{groupe}/comments/{id}', 'CommentController@update');
-    Route::get('{groupe}/comments/{id}', 'CommentController@show');
-    Route::delete('{groupe}/comments/{id}/', 'CommentController@destroy');
+    Route::get('{groupe}/comment/{id}', 'CommentController@show');
+    Route::delete('{groupe}/comments/{id}', 'CommentController@destroy');
 });
 
 // Route::group(['namespace' => 'Api'], function () {

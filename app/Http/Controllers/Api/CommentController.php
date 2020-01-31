@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Comment;
 use App\Http\Controllers\Controller;
+use App\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -14,10 +15,10 @@ class CommentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($post)
+    public function index($groupe, $post)
     {
         //
-        $comments = Comment::where('post_id', $post);
+        $comments = Comment::where('post_id', $post)->get();
 
         return response()->json($comments);
     }
@@ -31,17 +32,25 @@ class CommentController extends Controller
     public function store(Request $request, $groupe, $post, $parentComment = null)
     {
         //
+        $postObj = Post::find($post);
         $comment = new Comment();
-        $comment->content = $request['content'];
-        $comment->save();
+        if ($postObj) {
 
-        $comment->post()->associate($post);
+            // 'content' => $request['content'],
+            // $comment = $postObj->comments()->get();
 
-        if (!empty($parentComment)) {
-            $comment->parentComment()->associate($comment);
+            $comment->content = $request['content'];
+
+            $comment->user()->associate(Auth::id());
+            $comment->post()->associate($post);
+
+            if (!empty($parentComment)) {
+                $comment->parentComment()->associate($comment);
+            }
+
+            $comment->save();
+            return response()->json($comment);
         }
-
-        return response()->json($comment);
     }
 
     /**
@@ -53,7 +62,7 @@ class CommentController extends Controller
     public function show($groupe, $id)
     {
         //
-        return response()->json(Comment::find($id));
+        return response()->json(['comment' => Comment::find($id)]);
     }
 
     /**
@@ -67,7 +76,7 @@ class CommentController extends Controller
     {
         //
         $comment = Comment::find($id);
-        if ($comment->comment_id == Auth::id()) {
+        if ($comment->compte_id == Auth::id()) {
             $comment->content = $request['content'];
             $comment->save();
 
@@ -85,7 +94,7 @@ class CommentController extends Controller
     {
         $comment = Comment::find($id);
 
-        if ($comment->comment_id == Auth::id()) {
+        if ($comment->compte_id == Auth::id()) {
             $comment->delete();
         }
     }
