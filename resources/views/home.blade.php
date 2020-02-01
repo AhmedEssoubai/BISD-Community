@@ -2,6 +2,8 @@
 
 @section('content')
 <div id="app">
-    <example-component />
+    <Navbar></Navbar>
+    <router-view></router-view>
+    <footer-bar></footer-bar>
 </div>
 @endsection
