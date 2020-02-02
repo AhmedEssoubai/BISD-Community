@@ -62,4 +62,10 @@ class User extends Authenticatable
     {
         return $this->belongsToMany('App\Groupe', 'appartenire')->withPivot(['type']);
     }
+
+
+    public function favorises_post()
+    {
+        return $this->belongsToMany(User::class, 'favorise', 'compte_id', 'post_id');
+    }
 }

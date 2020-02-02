@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use App\Post;
 use App\Tag;
+use App\Image;
+use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
@@ -22,7 +24,7 @@ class PostController extends Controller
      */
     public function index($groupe)
     {
-        $data = Post::where('groupe_id', $groupe);
+        $data = Post::where('groupe_id', $groupe)->with(['images', 'compte'])->withCount(['comments', 'favorises_user'])->paginate(10);
         return response()->json($data, 200);
     }
 
@@ -44,6 +46,24 @@ class PostController extends Controller
 
         $post->save();
 
+        $imgs = [];
+        if ($request->has('images'))
+            foreach ($request['images'] as $file) {
+                $image = $file;  // your base64 encoded
+                $image_arr = explode(',', $image);
+                $extention = explode('/', explode(';', $image_arr[0])[0])[1];
+                $image = str_replace(' ', '+', $image_arr[1]);
+                $imageName = Str::random(20) . '.' . $extention;
+                $imgs[] = $imageName;
+
+                /**
+                 * Save Image path to db
+                 */
+                $post->images()->create(['chemin' => $imageName,]);
+
+                \File::put(storage_path() . '/' . $imageName, base64_decode($image));
+            }
+
         $tags = [];
         foreach ($request['tags'] as $tag) {
             $tags[] = Tag::create([
@@ -52,7 +72,8 @@ class PostController extends Controller
         }
 
         $post->tags()->attach($tags);
-        return $post;
+
+        return request()->all();
     }
 
     /**
