@@ -2031,9 +2031,21 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _cfg__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../cfg */ "./resources/js/cfg.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _cfg__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../cfg */ "./resources/js/cfg.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+//
+//
+//
+//
 //
 //
 //
@@ -2048,8 +2060,39 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["data"],
+  data: function data() {
+    return {
+      comment: {
+        content: ""
+      }
+    };
+  },
   methods: {
-    AddComment: function AddComment() {}
+    AddComment: function () {
+      var _AddComment = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("/api/".concat(this.$route.params.groupe, "/comments/").concat(this.$route.params.id, "?api_token=").concat(_cfg__WEBPACK_IMPORTED_MODULE_2__["api_token"]), this.comment);
+
+              case 2:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function AddComment() {
+        return _AddComment.apply(this, arguments);
+      }
+
+      return AddComment;
+    }()
   }
 });
 
@@ -2314,7 +2357,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({});
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ["data"],
+  mounted: function mounted() {
+    console.log(this.data);
+  },
+  computed: {
+    fullname: function fullname() {
+      return this.data.user ? "".concat(this.data.user.nom, " ").concat(this.data.user.prenom) : "";
+    },
+    avatar: function avatar() {
+      return this.data.user ? this.data.user.image : "";
+    }
+  }
+});
 
 /***/ }),
 
@@ -2833,9 +2889,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
 
 
 
@@ -2896,6 +2949,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     images: function images() {
       return this.post.data ? this.post.data.images : [];
+    },
+    comments: function comments() {
+      return this.post.data ? this.post.data.comments : [];
     }
   }
 });
@@ -40144,30 +40200,50 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "border-top mt-4 pt-4" }, [
-      _c("form", { attrs: { method: "POST", action: "" } }, [
-        _c("input", { attrs: { value: "100", name: "postId", hidden: "" } }),
-        _vm._v(" "),
+  return _c("div", { staticClass: "border-top mt-4 pt-4" }, [
+    _c(
+      "form",
+      {
+        attrs: { method: "POST", action: "" },
+        on: {
+          submit: function($event) {
+            $event.preventDefault()
+            return _vm.AddComment($event)
+          }
+        }
+      },
+      [
         _c("textarea", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.comment.content,
+              expression: "comment.content"
+            }
+          ],
           staticClass: "form-control",
-          attrs: { rows: "3", placeholder: "Ajouter un commentaire..." }
+          attrs: { rows: "3", placeholder: "Ajouter un commentaire..." },
+          domProps: { value: _vm.comment.content },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.comment, "content", $event.target.value)
+            }
+          }
         }),
         _vm._v(" "),
         _c("input", {
           staticClass: "my-3 form-control",
           attrs: { type: "submit", value: "Publier" }
         })
-      ])
-    ])
-  }
-]
+      ]
+    )
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -40504,39 +40580,28 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "media my-4" }, [
-      _c("img", {
-        staticClass: "mr-3 com-avatare rounded-circle",
-        attrs: { src: "img/avatar.png", alt: "avatar" }
-      }),
-      _vm._v(" "),
-      _c("div", { staticClass: "media-body" }, [
-        _c("h5", { staticClass: "mt-0 mb-3" }, [
-          _c("a", { staticClass: "_link", attrs: { href: "#" } }, [
-            _vm._v("Ahmed Essoubai")
-          ])
-        ]),
-        _vm._v(" "),
-        _c("p", [
-          _vm._v(
-            "Corporis repellat suscipit iure cum facilis commodi deserunt consequatur aliquid dicta ab cumque excepturi fugit magnam, temporibus perspiciatis omnis quasi pariatur ea!"
-          )
-        ]),
-        _vm._v(" "),
-        _c("small", { staticClass: "text-muted" }, [
-          _vm._v("10 SEPTEMBRE 2019")
+  return _c("li", { staticClass: "media my-4" }, [
+    _c("img", {
+      staticClass: "mr-3 com-avatare rounded-circle",
+      attrs: { src: _vm.avatar, alt: "avatar" }
+    }),
+    _vm._v(" "),
+    _c("div", { staticClass: "media-body" }, [
+      _c("h5", { staticClass: "mt-0 mb-3" }, [
+        _c("a", { staticClass: "_link", attrs: { href: "#" } }, [
+          _vm._v(_vm._s(_vm.fullname))
         ])
+      ]),
+      _vm._v(" "),
+      _c("p", [_vm._v(_vm._s(_vm.data.content))]),
+      _vm._v(" "),
+      _c("small", { staticClass: "text-muted" }, [
+        _vm._v(_vm._s(_vm.data.date_publication))
       ])
     ])
-  }
-]
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -41131,15 +41196,9 @@ var render = function() {
                 _c(
                   "ul",
                   { staticClass: "list-unstyled" },
-                  [
-                    _c("Comment"),
-                    _vm._v(" "),
-                    _c("Comment"),
-                    _vm._v(" "),
-                    _c("Comment"),
-                    _vm._v(" "),
-                    _c("Comment")
-                  ],
+                  _vm._l(_vm.comments, function(comment, i) {
+                    return _c("Comment", { key: i, attrs: { data: comment } })
+                  }),
                   1
                 ),
                 _vm._v(" "),

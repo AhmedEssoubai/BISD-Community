@@ -1,18 +1,33 @@
 <template>
   <li class="media my-4">
-    <img src="img/avatar.png" class="mr-3 com-avatare rounded-circle" alt="avatar" />
+    <img :src="avatar" class="mr-3 com-avatare rounded-circle" alt="avatar" />
     <div class="media-body">
       <h5 class="mt-0 mb-3">
-        <a href="#" class="_link">Ahmed Essoubai</a>
+        <a href="#" class="_link">{{ fullname }}</a>
       </h5>
-      <p>Corporis repellat suscipit iure cum facilis commodi deserunt consequatur aliquid dicta ab cumque excepturi fugit magnam, temporibus perspiciatis omnis quasi pariatur ea!</p>
-      <small class="text-muted">10 SEPTEMBRE 2019</small>
+      <p>{{ data.content }}</p>
+      <small class="text-muted">{{ data.date_publication }}</small>
     </div>
   </li>
 </template>
 
 <script>
-export default {};
+export default {
+  props: ["data"],
+  mounted() {
+    console.log(this.data);
+  },
+  computed: {
+    fullname() {
+      return this.data.user
+        ? `${this.data.user.nom} ${this.data.user.prenom}`
+        : "";
+    },
+    avatar() {
+      return this.data.user ? this.data.user.image : "";
+    }
+  }
+};
 </script>
 
 <style>
