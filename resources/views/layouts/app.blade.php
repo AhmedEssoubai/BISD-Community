@@ -17,6 +17,11 @@
     <script src="https://kit.fontawesome.com/666d79cf59.js" crossorigin="anonymous"></script>
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="css/style-nav.css"/>
+    <link rel="stylesheet" href="css/style-accueil.css">
+    <link rel="stylesheet" href="css/style-footer.css">
+    <link rel="stylesheet" href="css/style-groupe.css">
+    <link rel="stylesheet" href="css/style-profil.css">
 </head>
 
 <body>
