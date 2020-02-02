@@ -50,6 +50,7 @@ Route::group(['middleware' => ['auth:api'], 'namespace' => 'Api'], function () {
     Route::put('{groupe}/post/{id}', 'PostController@update');
     Route::get('{groupe}/post/{id}', 'PostController@show');
     Route::delete('{groupe}/post/{id}', 'PostController@destroy');
+    Route::post('{groupe}/post/fav/{id}', 'PostController@favoriser');
 
 
     /**
@@ -61,6 +62,11 @@ Route::group(['middleware' => ['auth:api'], 'namespace' => 'Api'], function () {
     Route::put('{groupe}/comments/{id}', 'CommentController@update');
     Route::get('{groupe}/comment/{id}', 'CommentController@show');
     Route::delete('{groupe}/comments/{id}', 'CommentController@destroy');
+
+    /**
+     * Groupe
+     */
+    Route::get('{groupe}/members/count', 'GroupeController@member_count');
 });
 
 Route::group(['namespace' => 'Auth'], function () {

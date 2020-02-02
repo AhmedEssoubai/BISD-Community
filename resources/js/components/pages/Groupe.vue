@@ -8,7 +8,7 @@
             <div class="row justify-content-between">
               <div class="col-4">
                 <h2 class="mb-3">BISD groupe</h2>
-                <p class="lead mt-2">Members : 18</p>
+                <p class="lead mt-2">Members : {{ MemberCount }}</p>
               </div>
               <div class="col-2">
                 <a class="px-5 py-2 rounded-pill btn btn-primary text-white m-auto">JOIN</a>
@@ -43,7 +43,8 @@ import { api_token } from "../../cfg";
 export default {
   data() {
     return {
-      posts: {}
+      posts: {},
+      groupe: {}
     };
   },
   components: {
@@ -57,14 +58,24 @@ export default {
         `/api/${this.$route.params.id}/post?api_token=${api_token}`
       );
       this.posts = res;
+    },
+    async GetGroupe() {
+      const res = await axios.get(
+        `/api/${this.$route.params.id}/members/count?api_token=${api_token}`
+      );
+      this.groupe = res;
     }
   },
   mounted() {
     this.GetPosts();
+    this.GetGroupe();
   },
   computed: {
     FormatedPost() {
       return this.posts.data ? this.posts.data.data : [];
+    },
+    MemberCount() {
+      return this.groupe.data ? this.groupe.data.users_count : 0;
     }
   }
 };

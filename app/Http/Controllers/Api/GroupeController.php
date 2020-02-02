@@ -72,4 +72,9 @@ class GroupeController extends Controller
     {
         //
     }
+
+    public function member_count($groupe)
+    {
+        return response()->json(Groupe::withCount('users')->find($groupe));
+    }
 }
