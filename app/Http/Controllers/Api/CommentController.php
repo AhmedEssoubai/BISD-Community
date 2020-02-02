@@ -34,6 +34,7 @@ class CommentController extends Controller
         //
         $postObj = Post::find($post);
         $comment = new Comment();
+
         if ($postObj) {
 
             // 'content' => $request['content'],

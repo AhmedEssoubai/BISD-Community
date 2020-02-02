@@ -39,10 +39,7 @@
           </div>
           <div class="p-4">
             <ul class="list-unstyled">
-              <Comment></Comment>
-              <Comment></Comment>
-              <Comment></Comment>
-              <Comment></Comment>
+              <Comment v-for="(comment, i) in comments" :data="comment" :key="i"></Comment>
             </ul>
             <AddComment></AddComment>
           </div>
@@ -93,6 +90,9 @@ export default {
     },
     images() {
       return this.post.data ? this.post.data.images : [];
+    },
+    comments() {
+      return this.post.data ? this.post.data.comments : [];
     }
   }
 };

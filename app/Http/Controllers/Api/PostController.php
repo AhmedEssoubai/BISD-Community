@@ -84,7 +84,9 @@ class PostController extends Controller
      */
     public function show($groupe, $id)
     {
-        return Post::with(['tags', 'compte', 'images'])->withCount(['comments', 'favorises_user'])->find($id);
+        return Post::with(['tags', 'compte', 'images', 'comments' => function ($query) {
+            $query->with('user');
+        }])->withCount(['comments', 'favorises_user'])->find($id);
     }
 
     /**
