@@ -2268,6 +2268,9 @@ function init() {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _cfg__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../cfg */ "./resources/js/cfg.js");
 //
 //
 //
@@ -2309,8 +2312,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["data"],
+  methods: {
+    Favoris: function Favoris(e) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/api/".concat(this.$route.params.id, "/post/fav/").concat(e.target.hash.replace("#", ""), "?api_token=").concat(_cfg__WEBPACK_IMPORTED_MODULE_1__["api_token"]));
+      console.log(e.target.hash.replace("#", ""));
+    }
+  },
   computed: {
     ExerpetContent: function ExerpetContent() {
       if (this.data.content) {
@@ -2388,7 +2399,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      posts: {}
+      posts: {},
+      groupe: {}
     };
   },
   components: {
@@ -2426,14 +2438,48 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
 
       return GetPosts;
+    }(),
+    GetGroupe: function () {
+      var _GetGroupe = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        var res;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.next = 2;
+                return axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("/api/".concat(this.$route.params.id, "/members/count?api_token=").concat(_cfg__WEBPACK_IMPORTED_MODULE_5__["api_token"]));
+
+              case 2:
+                res = _context2.sent;
+                this.groupe = res;
+
+              case 4:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, this);
+      }));
+
+      function GetGroupe() {
+        return _GetGroupe.apply(this, arguments);
+      }
+
+      return GetGroupe;
     }()
   },
   mounted: function mounted() {
     this.GetPosts();
+    this.GetGroupe();
   },
   computed: {
     FormatedPost: function FormatedPost() {
       return this.posts.data ? this.posts.data.data : [];
+    },
+    MemberCount: function MemberCount() {
+      return this.groupe.data ? this.groupe.data.users_count : 0;
     }
   }
 });
@@ -40212,7 +40258,30 @@ var render = function() {
           : _vm._e(),
         _vm._v(" "),
         _c("div", { staticClass: "card-body" }, [
-          _vm._m(0),
+          _c("div", { staticClass: "pb-3" }, [
+            _c(
+              "a",
+              {
+                staticClass: "icon mr-3",
+                attrs: { href: "#" + _vm.data.id },
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    return _vm.Favoris($event)
+                  }
+                }
+              },
+              [
+                _c("i", {
+                  staticClass: "fa fa-heart text-grey active",
+                  attrs: { "aria-hidden": "true" }
+                }),
+                _vm._v("Like\n        ")
+              ]
+            ),
+            _vm._v(" "),
+            _vm._m(0)
+          ]),
           _vm._v(" "),
           _c("h5", { staticClass: "card-title" }, [
             _vm._v("Unde laborum quasi porro ea, sint quibusdam dignissimos!")
@@ -40249,20 +40318,11 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "pb-3" }, [
-      _c("a", { staticClass: "icon mr-3", attrs: { href: "#" } }, [
-        _c("i", {
-          staticClass: "fa fa-heart text-grey active",
-          attrs: { "aria-hidden": "true" }
-        })
-      ]),
-      _vm._v(" "),
-      _c("a", { staticClass: "icon", attrs: { href: "#" } }, [
-        _c("i", {
-          staticClass: "fa fa-bookmark-o text-grey",
-          attrs: { "aria-hidden": "true" }
-        })
-      ])
+    return _c("a", { staticClass: "icon", attrs: { href: "#" } }, [
+      _c("i", {
+        staticClass: "fa fa-bookmark-o text-grey",
+        attrs: { "aria-hidden": "true" }
+      })
     ])
   }
 ]
@@ -40292,7 +40352,25 @@ var render = function() {
     { staticClass: "py-5 text-left bg-light", attrs: { id: "groupe" } },
     [
       _c("div", { staticClass: "container" }, [
-        _vm._m(0),
+        _c("div", { staticClass: "row bg-white shadow-sm" }, [
+          _c("div", { staticClass: "col p-0 border" }, [
+            _c("div", { attrs: { id: "cover" } }),
+            _vm._v(" "),
+            _c("div", { staticClass: "container p-4" }, [
+              _c("div", { staticClass: "row justify-content-between" }, [
+                _c("div", { staticClass: "col-4" }, [
+                  _c("h2", { staticClass: "mb-3" }, [_vm._v("BISD groupe")]),
+                  _vm._v(" "),
+                  _c("p", { staticClass: "lead mt-2" }, [
+                    _vm._v("Members : " + _vm._s(_vm.MemberCount))
+                  ])
+                ]),
+                _vm._v(" "),
+                _vm._m(0)
+              ])
+            ])
+          ])
+        ]),
         _vm._v(" "),
         _c("div", { staticClass: "row mt-4" }, [
           _c("div", { staticClass: "container" }, [
@@ -40328,31 +40406,15 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row bg-white shadow-sm" }, [
-      _c("div", { staticClass: "col p-0 border" }, [
-        _c("div", { attrs: { id: "cover" } }),
-        _vm._v(" "),
-        _c("div", { staticClass: "container p-4" }, [
-          _c("div", { staticClass: "row justify-content-between" }, [
-            _c("div", { staticClass: "col-4" }, [
-              _c("h2", { staticClass: "mb-3" }, [_vm._v("BISD groupe")]),
-              _vm._v(" "),
-              _c("p", { staticClass: "lead mt-2" }, [_vm._v("Members : 18")])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-2" }, [
-              _c(
-                "a",
-                {
-                  staticClass:
-                    "px-5 py-2 rounded-pill btn btn-primary text-white m-auto"
-                },
-                [_vm._v("JOIN")]
-              )
-            ])
-          ])
-        ])
-      ])
+    return _c("div", { staticClass: "col-2" }, [
+      _c(
+        "a",
+        {
+          staticClass:
+            "px-5 py-2 rounded-pill btn btn-primary text-white m-auto"
+        },
+        [_vm._v("JOIN")]
+      )
     ])
   }
 ]

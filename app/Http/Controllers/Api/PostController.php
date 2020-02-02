@@ -129,4 +129,15 @@ class PostController extends Controller
             return response()->json(['response' => "delated"]);
         }
     }
+
+    public function favoriser($groupe, $id)
+    {
+        $post = Post::find($id);
+
+        if ($post->favorises_user()->has('user_id', Auth::id())) {
+            $post->favorises_user()->attach(Auth::id());
+            return response()->json(['message' => 'posted Added Succesfuly'], 200);
+        }
+        // return response()->json(['message' => 'posted Added Succesfuly'], 200);
+    }
 }
