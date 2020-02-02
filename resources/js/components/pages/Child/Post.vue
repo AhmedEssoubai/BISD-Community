@@ -16,9 +16,7 @@
       <img v-if="data.images[0]" :src="data.images[0].chemin" class="card-img-top" alt="post image" />
       <div class="card-body">
         <div class="pb-3">
-          <a @click.prevent="Favoris" class="icon mr-3" :href="'#' + data.id">
-            <i class="fa fa-heart text-grey active" aria-hidden="true"></i>Like
-          </a>
+          <Favorise :data="data"></Favorise>
           <a class="icon" href="#">
             <i class="fa fa-bookmark-o text-grey" aria-hidden="true"></i>
           </a>
@@ -42,19 +40,11 @@
 <script>
 import axios from "axios";
 import { api_token } from "../../../cfg";
+import Favorise from "./Favorise";
 export default {
   props: ["data"],
-  methods: {
-    Favoris(e) {
-      axios.post(
-        `/api/${this.$route.params.id}/post/fav/${e.target.hash.replace(
-          "#",
-          ""
-        )}?api_token=${api_token}`
-      );
-      console.log(e.target.hash.replace("#", ""));
-    }
-  },
+  methods: {},
+  components: { Favorise },
   computed: {
     ExerpetContent() {
       if (this.data.content) {
