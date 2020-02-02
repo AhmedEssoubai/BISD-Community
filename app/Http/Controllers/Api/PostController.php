@@ -24,7 +24,7 @@ class PostController extends Controller
      */
     public function index($groupe)
     {
-        $data = Post::where('groupe_id', $groupe);
+        $data = Post::where('groupe_id', $groupe)->with(['images', 'compte'])->withCount(['comments', 'favorises_user'])->paginate(10);
         return response()->json($data, 200);
     }
 

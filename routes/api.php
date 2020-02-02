@@ -63,7 +63,6 @@ Route::group(['middleware' => ['auth:api'], 'namespace' => 'Api'], function () {
     Route::delete('{groupe}/comments/{id}', 'CommentController@destroy');
 });
 
-// Route::group(['namespace' => 'Api'], function () {
-//     // Creation Test Routes
-//     Route::get('{groupe}/post', 'PostController@store');
-// });
+Route::group(['namespace' => 'Auth'], function () {
+    Route::post('/login', 'LoginController@login');
+});

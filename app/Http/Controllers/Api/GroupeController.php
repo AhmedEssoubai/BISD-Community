@@ -34,7 +34,7 @@ class GroupeController extends Controller
             'label' => $request['nom'],
             'icon' => 'group-' . $request['icon'] . '.png',
             'etat' => $request['etat']
-        ])->users()->attach(Auth::id());
+        ])->users()->attach([Auth::id() => ['type' => 'admin']]);
 
         return response()->json(['Groupe Added']);
     }
