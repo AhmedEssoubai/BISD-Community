@@ -20,7 +20,10 @@
       <div class="row mt-4">
         <div class="container">
           <div class="row">
-            <NewPost />
+            <div class="col-md-8">
+              <NewPost />
+              <Post v-for="( post, i) in FormatedPost" :key="i" :data="post" />
+            </div>
 
             <SideBar />
           </div>
@@ -33,11 +36,36 @@
 <script>
 import NewPost from "./Actions/NewPost";
 import SideBar from "../layout/SideBar";
+import Post from "./Child/Post";
+import axios from "axios";
+import { api_token } from "../../cfg";
 
 export default {
+  data() {
+    return {
+      posts: {}
+    };
+  },
   components: {
     NewPost,
-    SideBar
+    SideBar,
+    Post
+  },
+  methods: {
+    async GetPosts() {
+      const res = await axios.get(
+        `/api/${this.$route.params.id}/post?api_token=${api_token}`
+      );
+      this.posts = res;
+    }
+  },
+  mounted() {
+    this.GetPosts();
+  },
+  computed: {
+    FormatedPost() {
+      return this.posts.data ? this.posts.data.data : [];
+    }
   }
 };
 </script>

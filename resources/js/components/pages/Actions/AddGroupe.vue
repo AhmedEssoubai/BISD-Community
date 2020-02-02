@@ -53,7 +53,7 @@ export default {
   methods: {
     async addGroup() {
       const api_token =
-        "MnmWqFTxzc7HQ7kFMEwYoH1egi2P1uOkhBfwDyeS45bSXBPrBWIWkgYln31ukHDXjIhU4YTXPzZD0Jeo";
+        "45KOKqvLjLPFoQ2YbVcj5tLVFYTSEB43xZsJ0WHJKRND1GWozdQNF20OYJkOQzLpzKsYktgrymXXMtbH";
 
       console.log("Submit");
       const result = await axios.post(

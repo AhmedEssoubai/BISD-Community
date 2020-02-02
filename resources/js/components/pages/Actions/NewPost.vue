@@ -1,38 +1,36 @@
 <template>
-  <div class="col-md-8">
-    <div id="newPost" class="bg-white p-3 shadow-sm border">
-      <form @submit.prevent="AddPost">
-        <h3 class="mb-3">New post</h3>
-        <textarea
-          class="form-control my-2"
-          v-model="post.content"
-          name="content"
-          rows="4"
-          placeholder="Share your ideas"
-        ></textarea>
-        <div class="custom-file my-2">
-          <input
-            type="file"
-            name="image"
-            @change="PushFiles"
-            class="custom-file-input"
-            id="postImage"
-            multiple="multiple"
-          />
-          <label class="custom-file-label" for="postImage">Choose Image</label>
-        </div>
-        <label class="label" for="tags">Tags (Separated by comma ',')</label>
+  <div id="newPost" class="bg-white p-3 shadow-sm border">
+    <form @submit.prevent="AddPost">
+      <h3 class="mb-3">New post</h3>
+      <textarea
+        class="form-control my-2"
+        v-model="post.content"
+        name="content"
+        rows="4"
+        placeholder="Share your ideas"
+      ></textarea>
+      <div class="custom-file my-2">
         <input
-          type="text"
-          id="tags"
-          name="tags"
-          v-model="post.tags"
-          class="form-control my-2"
-          placeholder="Tags ex: c, php, java etc..."
+          type="file"
+          name="image"
+          @change="PushFiles"
+          class="custom-file-input"
+          id="postImage"
+          multiple="multiple"
         />
-        <button type="submit" class="btn btn-primary form-control my-2">Publish</button>
-      </form>
-    </div>
+        <label class="custom-file-label" for="postImage">Choose Image</label>
+      </div>
+      <label class="label" for="tags">Tags (Separated by comma ',')</label>
+      <input
+        type="text"
+        id="tags"
+        name="tags"
+        v-model="post.tags"
+        class="form-control my-2"
+        placeholder="Tags ex: c, php, java etc..."
+      />
+      <button type="submit" class="btn btn-primary form-control my-2">Publish</button>
+    </form>
   </div>
 </template>
 
