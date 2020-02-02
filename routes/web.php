@@ -16,4 +16,5 @@ Route::get('/', function () {
 });
 
 
+
 Route::get('/{any}', 'HomeController@index')->where('any', '.*');

@@ -84,7 +84,7 @@ class PostController extends Controller
      */
     public function show($groupe, $id)
     {
-        return Post::with('tags')->find($id);
+        return Post::with(['tags', 'compte', 'images'])->withCount(['comments', 'favorises_user'])->find($id);
     }
 
     /**
@@ -134,10 +134,12 @@ class PostController extends Controller
     {
         $post = Post::find($id);
 
-        if ($post->favorises_user()->has('user_id', Auth::id())) {
+        // return response()->json(empty($post->favorises_user()->find(Auth::id())));
+
+        if (empty($post->favorises_user()->find(Auth::id()))) {
             $post->favorises_user()->attach(Auth::id());
             return response()->json(['message' => 'posted Added Succesfuly'], 200);
         }
-        // return response()->json(['message' => 'posted Added Succesfuly'], 200);
+        return response()->json(['message' => 'posted already existe'], 200);
     }
 }
