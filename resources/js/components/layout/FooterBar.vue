@@ -4,7 +4,7 @@
       <div class="container">
         <div class="row my-3">
           <span class="lead mr-auto my-auto">
-            <a class="_link" href="#">A propos</a>
+            <a class="_link" href="apropos">A propos</a>
           </span>
         </div>
       </div>

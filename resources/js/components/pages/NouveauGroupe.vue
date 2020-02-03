@@ -6,8 +6,9 @@
           <h2 class="mb-2 pb-3">Créer votre groupe maintenant !</h2>
           <ul>
             <li class="py-2">Partager vos connaissence avec les membres du groupe.</li>
-            <li class="py-2">Vous pouvez mettre le groupe privée ou public selon votre choix.</li>
-            <li class="py-2"></li>
+            <li class="py-2">Vous pouvez mettre le groupe privée ou public selon votre choix. </li>
+            <li class="py-2">Vous supprimer le groupe que vous avez créer lorsque vous voulez</li>
+            <li class="py-2">Vous pouvez ajouter des membres aux votre groupe </li>
           </ul>
         </div>
         <div id="forme" class="col-md-5 offset-sm-1 p-5 my-3 bg-white shadow">

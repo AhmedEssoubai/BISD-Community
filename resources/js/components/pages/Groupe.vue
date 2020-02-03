@@ -7,24 +7,30 @@
           <div class="container p-4">
             <div class="row justify-content-between">
               <div class="col-4">
-                <h2 class="mb-3">BISD groupe</h2>
-                <p class="lead mt-2">Members : {{ MemberCount }}</p>
+                <h2 class="mb-3">
+                    BISD
+                </h2>
+                <p class="lead mt-2">
+                    Members : {{ MemberCount }}
+                </p>
+                <a href="admingroupe.html" class="_link">
+                    Admin
+                </a>
               </div>
               <div class="col-2">
-                <a class="px-5 py-2 rounded-pill btn btn-primary text-white m-auto">JOIN</a>
+                  <a class="px-5 py-2 rounded-pill btn btn-primary text-white m-auto">Joindre</a>
               </div>
             </div>
           </div>
         </div>
       </div>
       <div class="row mt-4">
-        <div class="container">
+        <div class="container px-0">
           <div class="row">
             <div class="col-md-8">
               <NewPost />
-              <Post v-for="( post, i) in FormatedPost" :key="i" :data="post" />
+              <Post v-for="( post, i) in FormatedPost" :key="i" :data="post"/>
             </div>
-
             <SideBar />
           </div>
         </div>

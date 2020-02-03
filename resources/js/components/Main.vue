@@ -11,7 +11,7 @@
                           avec Bisd Community vous pouvez partager tous ce que vous voulez avec les autres.
                       </p>
                       <div class="mt-5">
-                          <a href="login.html" class="btn btn-primary btn-lg text-white rounded-pill">
+                          <a href="login" class="btn btn-primary btn-lg text-white rounded-pill">
                               S'inscrire
                           </a>
                       </div>
@@ -42,7 +42,7 @@
             <div class="row text-white text-left">
                 <div class="col-xs-12 col-md-6 col-lg-3">
                     <div class="card">
-                        <img class="card-img-top w-50 m-auto" src="img/prop-0.png" alt="Card image cap">
+                        <img src="img/prop-0.png" class="card-img-top w-50 m-auto" alt="Card image cap">
                         <div class="card-body">
                           <h5 class="card-title">Partagez facilement avec qui vous voulez</h5>
                           <p class="card-text">le partage en utilisant Bisd Community, c'est simple et rapide.Un simple lien vous permet de partager toutes sortes de fichiers (photo, vidéo, dossier compressé,  etc.) avec qui vous voulez</p>
@@ -51,7 +51,7 @@
                 </div>
                 <div class="col-xs-12 col-md-6 col-lg-3">
                     <div class="card">
-                        <img class="card-img-top w-50 m-auto" src="img/prop-1.png" alt="Card image cap">
+                        <img src="img/prop-1.png" class="card-img-top w-50 m-auto" alt="Card image cap">
                         <div class="card-body">
                           <h5 class="card-title">Gérez vos groupes.</h5>
                           <p class="card-text">avec Bisd Community, vous pouvez facilement importer des fichiers et partager des documents avec les personnes concernées, en créant un groupe, en ajoutant une liste de membres et en invitant ces derniers à accéder à un dossier partagé.</p>
@@ -60,7 +60,7 @@
                 </div>
                 <div class="col-xs-12 col-md-6 col-lg-3">
                     <div class="card">
-                        <img class="card-img-top w-50 m-auto" src="img/prop-2.png" alt="Card image cap">
+                        <img src="img/prop-2.png" class="card-img-top w-50 m-auto" alt="Card image cap">
                         <div class="card-body">
                           <h5 class="card-title">Recevez des notifications</h5>
                           <p class="card-text">Soyez averti au moment précis où un utilisateur commenter à votre publication ou a partager dans votre groupe.</p>
@@ -69,7 +69,7 @@
                 </div>
                 <div class="col-xs-12 col-md-6 col-lg-3">
                     <div class="card">
-                        <img class="card-img-top w-50 m-auto" src="img/prop-3.png" alt="Card image cap">
+                        <img src="img/prop-3.png" class="card-img-top w-50 m-auto" alt="Card image cap">
                         <div class="card-body">
                           <h5 class="card-title">Etudier avec les autres</h5>
                           <p class="card-text">posez des questions, partagez des cours,exercices... et partagez des connaissences avec les autres</p>
@@ -83,9 +83,13 @@
 </template>
 
 <script>
+import prop0 from "../../assets/img/props/prop-0.png";
+import prop1 from "../../assets/img/props/prop-1.png";
+import prop2 from "../../assets/img/props/prop-2.png";
+import prop3 from "../../assets/img/props/prop-3.png";
 export default {
   mounted() {
-    console.log("Component mounted.");
+    return { prop0, prop1, prop2, prop3 };
   }
 };
 </script>

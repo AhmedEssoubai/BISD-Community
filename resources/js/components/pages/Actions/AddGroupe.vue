@@ -45,8 +45,8 @@ export default {
     return {
       group: {
         nom: "",
-        icon: -1,
-        etat: "public"
+        icon: 0,
+        etat: "Public"
       }
     };
   },

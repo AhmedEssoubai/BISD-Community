@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-light navbar-toggleable-sm">
     <div class="container">
-      <a href="#" class="navbar-brand">
+      <a href="/" class="navbar-brand">
         <img :src="logo" class="img-fluid" width="160px" />
       </a>
       <form class="w-50 mw-100 mx-auto" method="GET" action="#">
@@ -35,7 +35,7 @@
       <div class="collapse navbar-collapse ml-3" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a href="#" class="nav-link active">Accueil</a>
+            <a href="group/id=1" class="nav-link active">Accueil</a>
           </li>
           <li class="nav-item">
             <a href="#" class="nav-link">Groupes</a>
@@ -45,7 +45,7 @@
           </li>
           <li class="nav-item dropdown">
             <img
-              src="img/avatar.png"
+              :src="avatar"
               id="dml_profil"
               class="img-fluid border border-secondary rounded-circle dropdown-toggle"
               width="50px"
@@ -53,10 +53,10 @@
               aria-haspopup="true"
               aria-expanded="false"
             />
-            <div class="dropdown-menu" aria-labelledby="dml_profil">
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dml_profil">
               <a class="dropdown-item" href="#">Profil</a>
               <a class="dropdown-item" href="#">Paramètres</a>
-              <a class="dropdown-item" href="#">Se déconnecter</a>
+              <a class="dropdown-item" href="logout">Se déconnecter</a>
             </div>
           </li>
         </ul>
@@ -67,9 +67,10 @@
 
 <script>
 import logo from "../../../assets/img/logo.png";
+import avatar from "../../../assets/img/avatar.png";
 export default {
   data() {
-    return { logo };
+    return { logo, avatar };
   }
 };
 </script>

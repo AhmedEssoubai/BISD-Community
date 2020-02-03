@@ -1,13 +1,14 @@
 <template>
   <div id="newPost" class="bg-white p-3 shadow-sm border">
     <form @submit.prevent="AddPost">
-      <h3 class="mb-3">New post</h3>
+      <h3 class="mb-3">Nouveau post</h3>
+      <input type="text" name="title" class="form-control my-2" placeholder="Titre du post"/> 
       <textarea
         class="form-control my-2"
         v-model="post.content"
         name="content"
         rows="4"
-        placeholder="Share your ideas"
+        placeholder="Partager vos idées"
       ></textarea>
       <div class="custom-file my-2">
         <input
@@ -18,7 +19,7 @@
           id="postImage"
           multiple="multiple"
         />
-        <label class="custom-file-label" for="postImage">Choose Image</label>
+        <label class="custom-file-label" for="postImage">Choisir image</label>
       </div>
       <label class="label" for="tags">Tags (Separated by comma ',')</label>
       <input
@@ -29,7 +30,7 @@
         class="form-control my-2"
         placeholder="Tags ex: c, php, java etc..."
       />
-      <button type="submit" class="btn btn-primary form-control my-2">Publish</button>
+      <button type="submit" class="btn btn-primary form-control my-2">Publier</button>
     </form>
   </div>
 </template>
